@@ -2,11 +2,18 @@
 #include <stdlib.h>
 
 typedef struct {
-    char title [255], author_name[50], ISBN [10];
-    int pages, year_published;
-}book;
+    char title[255];
+    char author_name[50];
+    char ISBN[10];
+    char pages[10];
+    char year_published[10];
+} book;
 
-int parse_file(char filename[], book book_array[]);
+int parse_file(char filename[], book my_book[]);
+void print_book(book my_book[]);
+void search_title(book my_book_array[], int bookNum, char inp[]);
+void search_author(book my_book_array[], int bookNum, char inp[]);
+void search_ISBN(book my_book_array[], int bookNum, char inp[]);7
 
 int main()
 {

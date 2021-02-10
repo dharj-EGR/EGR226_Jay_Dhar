@@ -9,10 +9,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void prompt(void);
-void calcResistorColors(int userInput);
-void getColorBands(char* band1, char* band2, char* band3, char* band4);
-void calcResistance(char r1, char r2, char r3, char r4);
+void prompt(void); //prompt the user with a resistor table and ask what kind of function to do
+void calcResistorColors(int userInput); //same function as lab 1, takes user input integer and converts into colors
+void getColorBands(char* band1, char* band2, char* band3, char* band4); //function to take user input for colors and then convert to number resistance
+void calcResistance(char r1, char r2, char r3, char r4); //computes what the chars from the above custom function actually are as a resistance
 
 /*In the main function, only 3 variables will be needed, most of the work will be
 done in the custom function. A loop is used to ask the user whether or not they
@@ -20,26 +20,29 @@ would like to try another 3-band resistor. The main function will also be taking
 the integer input that will be sent to the custom function for computation.*/
 int main()
 {
-    int userInput, dummy, repeat = 1, functionChoice;//dummy is used here for error checking. we want to make sure the input is a number, not anything else
-    char band1, band2, band3, band4;
+    int userInput, dummy = 0, repeat = 1, functionChoice;//dummy is used here for error checking. we want to make sure the input is a number, not anything else
+    char band1, band2, band3, band4; //these band chars will be used as pointers for the user input function
 
     while (repeat == 1){//program will loop as long as the user would like it to
     prompt();
-    scanf("%d", &functionChoice);
+    scanf("%d", &functionChoice); //user will input whether they would like to see colors from a resistor code or vice versa
 
     if (functionChoice == 1) {
-        getColorBands(&band1, &band2, &band3, &band4);
-        calcResistance(band1, band2, band3, band4);
+        getColorBands(&band1, &band2, &band3, &band4);//first get user input
+        calcResistance(band1, band2, band3, band4); //compute what these colors mean in a resistance value
     }
 
-    dummy  = scanf("%d", &userInput); //if the user input is incorrect, the if statement will trigger
+    else if (functionChoice == 2) {
+
+        printf("Enter color code: ");
+    dummy  = scanf(" %d", &userInput); //if the user input is incorrect, the if statement will trigger
     if (dummy != 1 || userInput < 0 || userInput > 990000000) { //dummy will not be 1 whenever user input is something besides an integer
         printf("Invalid Input, restart program and try again\n");
         exit (-1);
     }
-
-
     calcResistorColors(userInput);
+
+    }
 
     printf("\n\nTry again? 1 = yes; anything else = quit\n");
     scanf("%d", &repeat);
@@ -71,6 +74,8 @@ void prompt() {
     printf("Would you like to find resistance based color code, or find color code based on resistance?\nPress 1 for resistance, 2 for color code\n"); //asks the user for input
 }
 
+/*This function takes 4 chars as input as pointers. This allows the function to return more than just one function at a time
+This function will ask for user input on each band and then will take that input into each band's pointer*/
 void getColorBands(char* band1, char* band2, char* band3, char* band4){
     printf("Enter band 1: \n");
     scanf(" %c", band1);
@@ -84,122 +89,151 @@ void getColorBands(char* band1, char* band2, char* band3, char* band4){
     printf("Enter band 4: \n");
     scanf(" %c", band4);
 }
-
+/*This function will take the inputs from the band chars found in the function above and compute the total resistance as well as
+error. It will print the numbers as the computations are made.*/
 void calcResistance(char r1, char r2, char r3, char r4){
-    float res;
+    float res; //this float is used for the program to also know what the current resistance value is
 
-    printf("The resistor is ");
+    printf("The resistor is "); //starting off with a print statement to be able to tell the user what the resistance is
 
-    switch(r1) {
+    switch(r1) { //switch case used to sort the user inputs from each char and find which character matches. It will print a number based on the corresponding letter
     case 'k':
         printf("");
+        break;
 
     case 'n':
         printf("1");
         res = 1.0 * 10.0;
+        break;
 
     case 'r':
         printf("2");
         res = 2.0 * 10.0;
+        break;
 
     case 'o':
         printf("3");
         res = 3.0 * 10.0;
+        break;
 
     case 'y':
         printf("4");
         res = 4.0 * 10.0;
+        break;
 
     case 'g':
         printf("5");
         res = 5.0 * 10.0;
+        break;
 
     case 'b':
         printf("6");
         res = 6.0 * 10.0;
+        break;
 
     case 'v':
         printf("7");
         res = 7.0 *10.0;
+        break;
 
     case 'e':
         printf("8");
         res = 8.0 * 10.0;
+        break;
 
     case 'w':
         printf("9");
         res = 9.0 * 10.0;
+        break;
 
     case 'd':
         printf("");
+        break;
 
     case 's':
         printf("");
+        break;
     }
 
-    switch (r2) {
+    switch (r2) {//same as switch r1
 
     case 'k':
         printf("0");
+        break;
 
     case 'n':
         printf("1");
         res += 1.0;
+        break;
 
     case 'r':
         printf("2");
         res += 2.0;
+        break;
 
     case 'o':
         printf("3");
         res += 3.0;
+        break;
 
     case 'y':
         printf("4");
         res += 4.0;
+        break;
 
     case 'g':
         printf("5");
         res += 5.0;
+        break;
 
     case 'b':
         printf("6");
         res += 6.0;
+        break;
 
     case 'v':
         printf("7");
         res += 7.0;
+        break;
 
     case 'e':
         printf("8");
         res += 8.0;
+        break;
 
     case 'w':
         printf("9");
         res += 9.0;
+        break;
 
     case 'd':
         printf("");
+        break;
 
     case 's':
         printf("");
+        break;
     }
 
-    switch(r3) {
+    switch(r3) {//same as switch r1 & r2
     case 'k':
         printf("");
+        break;
 
     case 'n':
         printf("0");
         res *= 10.0;
+        break;
 
     case 'r':
         printf("00");
         res *= 100.0;
+        break;
 
     case 'o':
         printf("000");
         res *= 1000.0;
+        break;
 
     case 'y':
         printf("0000");
@@ -208,6 +242,7 @@ void calcResistance(char r1, char r2, char r3, char r4){
     case 'g':
         printf("00000");
         res *= 100000.0;
+        break;
 
     case 'b':
         printf("000000");
@@ -216,65 +251,82 @@ void calcResistance(char r1, char r2, char r3, char r4){
     case 'v':
         printf("0000000");
         res *= 10000000.0;
+        break;
 
     case 'e':
         printf("00000000");
         res *= 100000000.0;
+        break;
 
     case 'w':
         printf("000000000");
         res *= 1000000000.0;
+        break;
 
     case 'd':
         res *= 0.1;
         printf("%f", res);
+        break;
 
     case 's':
         res *= 0.01;
         printf("%f", res);
+        break;
     }
 
     printf(" Ohms with a ");
 
     switch (r4) {
     case 'k':
-        printf("+/- 1%");
+        printf("+/- 1% tolerance.\n");
+        break;
 
     case 'n':
-        printf("+/- 2%");
+        printf("+/- 2% tolerance.\n");
+        break;
 
     case 'r':
-        printf("");
+        printf("zero tolerance.\n");
+        break;
 
     case 'o':
-        printf("");
+        printf("zero tolerance.\n");
+        break;
 
     case 'y':
-        printf("");
+        printf("zero tolerance.\n");
+        break;
 
     case 'g':
-        printf("+/- 0.5%");
+        printf("+/- 0.5% tolerance.\n");
+        break;
 
     case 'b':
-        printf("+/- 0.25");
+        printf("+/- 0.25 tolerance.\n");
+        break;
 
     case 'v':
-        printf("+/- 0.1");
+        printf("+/- 0.1 tolerance.\n");
+        break;
 
     case 'e':
-        printf("+/- 0.05");
+        printf("+/- 0.05 tolerance.\n");
+        break;
 
     case 'w':
-        printf("");
+        printf("zero tolerance.\n");
+        break;
 
     case 'd':
-        printf("+/- 5%");
+        printf("+/- 5% tolerance.\n");
+        break;
 
     case 's':
-        printf("+/- 10%");
+        printf("+/- 10% tolerance.\n");
+        break;
     }
 
-    printf("tolerance.\n");
+
 }
 
 /*In the calcResistorColors function, the computations of determining colors are done.
